@@ -590,6 +590,20 @@ section {
   height: 100%;
 }
 
+@media (max-width: 455px) {
+  #vanish{
+    display: none;
+  }
+  
+}
+
+@media (max-width: 360px) {
+  #features .liit {
+    font-size: 13px;
+  }
+  
+}
+
 @media (max-width: 575px) {
   .get-started .php-email-form {
     padding: 20px;
