@@ -265,7 +265,7 @@ section {
 }
 
 .header .logo img {
-  max-height: 40px;
+  max-height: 50px;
   margin-right: 6px;
 }
 
@@ -280,6 +280,15 @@ section {
 .header .logo h1 span {
   color: var(--color-primary);
 }
+/*-----------------------------------------
+# Logo adjustment for tablet and desktop 
+-----------------------------------------*/
+@media (min-width: 766px){
+  .header .logo img {
+    max-height: 100px;
+    margin-right: 6px; 
+  } 
+}
 
 /*--------------------------------------------------------------
 # Desktop Navigation
@@ -288,6 +297,9 @@ section {
   .navbar {
     padding: 0;
   }
+
+  
+  
 
   .navbar ul {
     margin: 0;
