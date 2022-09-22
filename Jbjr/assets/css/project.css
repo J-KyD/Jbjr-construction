@@ -1528,9 +1528,16 @@ section {
   transition: 0.3s;
 }
 
+#port{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .project-details .portfolio-info .btn-visit:hover {
   background: #ffc019;
 }
+
 
 .project-details .portfolio-description h2 {
   font-size: 26px;
@@ -1541,6 +1548,7 @@ section {
 
 .project-details .portfolio-description p {
   padding: 0;
+  width: 50%;
 }
 
 .project-details .portfolio-description .testimonial-item {
