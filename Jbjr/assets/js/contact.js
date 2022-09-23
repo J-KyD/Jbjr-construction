@@ -50,85 +50,136 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
 
+  /**
+   * form
+   */
+   const form = document.getElementById('form');
+   const username = document.getElementById('name');
+   const email = document.getElementById('email');
+   const subject = document.getElementById('subject');
+   const message = document.getElementById('message');
+  
+  
+   
+   form.addEventListener('submit', e => {
+       e.preventDefault();
+   
+       validateInputs();
+   });
+   
+   const setError = (element, message) => {
+       const inputControl = element.parentElement;
+       const errorDisplay = inputControl.querySelector('.error');
+   
+       errorDisplay.innerText = message;
+       inputControl.classList.add('error');
+       inputControl.classList.remove('success')
+   }
+   
+   const setSuccess = element => {
+       const inputControl = element.parentElement;
+       const errorDisplay = inputControl.querySelector('.error');
+   
+       errorDisplay.innerText = '';
+       inputControl.classList.add('success');
+       inputControl.classList.remove('error');
+   };
+   
+   const isValidEmail = email => {
+       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       return re.test(String(email).toLowerCase());
+   }
+   
+   const validateInputs = () => {
+       const usernameValue = username.value.trim();
+       const emailValue = email.value.trim();
+       const subjectValue = subject.value.trim();
+       const messageValue = message.value.trim();
 
-/**
- * form
- */
+       if(usernameValue.length >0 && emailValue.length >0 && subjectValue.length > 0 && messageValue.length >0 && isValidEmail(emailValue)){
 
- const form = document.getElementById('form');
- const username = document.getElementById('name');
- const email = document.getElementById('email');
- const subject = document.getElementById('subject');
- const message = document.getElementById('message');
+        const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-btn]')
+const overlay = document.getElementById('overlay')
+
+openModalButtons.forEach(button=>{
+	button.addEventListener('click',()=>{
+		const modal = document.querySelector(button.dataset.modalTarget)
+		openModal(modal)
+	})
+})
+
+overlay.addEventListener('click', () =>{
+	const modals = document.querySelectorAll('.modal.active')
+	modals.forEach(modal =>{
+	closeModal(modal)
+	})
+})
+
+closeModalButtons.forEach(button=>{
+	button.addEventListener('click',()=>{
+		const modal = button.closest('.modal')
+		closeModal(modal)
+	})
+})
+
+function openModal(modal){
+	if (modal == null) return
+		modal.classList.add('active')
+	overlay.classList.add('active')
+}
+
+function closeModal(modal){
+	if (modal == null) return
+		modal.classList.remove('active')
+		overlay.classList.remove('active')
+ 
+
+}
+setSuccess(username);
+setSuccess(email);
+setSuccess(subject);
+setSuccess(message);
 
 
- 
- form.addEventListener('submit', e => {
-     e.preventDefault();
- 
-     validateInputs();
- });
- 
- const setError = (element, message) => {
-     const inputControl = element.parentElement;
-     const errorDisplay = inputControl.querySelector('.error');
- 
-     errorDisplay.innerText = message;
-     inputControl.classList.add('error');
-     inputControl.classList.remove('success')
- }
- 
- const setSuccess = element => {
-     const inputControl = element.parentElement;
-     const errorDisplay = inputControl.querySelector('.error');
- 
-     errorDisplay.innerText = '';
-     inputControl.classList.add('success');
-     inputControl.classList.remove('error');
- };
- 
- const isValidEmail = email => {
-     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-     return re.test(String(email).toLowerCase());
- }
- 
- const validateInputs = () => {
-     const usernameValue = username.value.trim();
-     const emailValue = email.value.trim();
-     const subjectValue = subject.value.trim();
-     const messageValue = message.value.trim();
-    
-     if(usernameValue === '') {
-         setError(username, 'Name is required');
-     } else {
-         setSuccess(username);
-     }
- 
-     if(emailValue === '') {
-         setError(email, 'Email is required');
-     } else if (!isValidEmail(emailValue)) {
-         setError(email, 'Provide a valid email address');
-     } else {
-         setSuccess(email);
-     }
-
-     if(subjectValue === '') {
-        setError(subject, 'Subject is required');
-    } else {
-        setSuccess(subject);
+       }
+  
+      else{
+       if(usernameValue === '') {
+           setError(username, 'Name is required');
+       } else {
+           setSuccess(username);
+       }
+   
+       if(emailValue === '') {
+           setError(email, 'Email is required');
+       } else if (!isValidEmail(emailValue)) {
+           setError(email, 'Provide a valid email address');
+       } else {
+           setSuccess(email);
+       }
+  
+       if(subjectValue === '') {
+          setError(subject, 'Subject is required');
+      } else {
+          setSuccess(subject);
+      }
+      if(messageValue === '') {
+          setError(message, 'message is required');
+      } else {
+          setSuccess(message);
+      }
+  
     }
-    if(messageValue === '') {
-        setError(message, 'message is required');
-    } else {
-        setSuccess(message);
-    }
+   
+   };
+   
 
- 
-     
- 
- };
- 
 
+ /**
+  * modal
+  */
+  
   /**
    * Toggle mobile nav dropdowns
    */
